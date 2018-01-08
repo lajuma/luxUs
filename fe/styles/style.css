@@ -1,0 +1,559 @@
+/*-------------------------------------------------
+	  Body/Main
+-------------------------------------------------*/
+
+.main-container {
+    padding: 1% 10%;
+}
+
+body {
+    color: #555;
+}
+
+th {
+    background-color: #AAA;
+    color: white;
+}
+
+.table>thead>tr>th {
+    border: none;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .main-container {
+        padding: 1% 5%;
+    }
+}
+
+
+/*-------------------------------------------------
+	   Buttons
+-------------------------------------------------*/
+
+.btn-default:hover {
+    background-color: grey;
+    color: white;
+    border-color: #777;
+}
+
+.btn-grey {
+    background-color: #aaa;
+    border-color: #999;
+    color: white;
+}
+
+.btn-grey:hover {
+    background-color: grey;
+    color: white;
+    border-color: #777;
+}
+
+.btn-primary {
+    background-color: #39aedf;
+    border-color: #00a2db;
+}
+
+.btn-primary:hover {
+    background-color: #00a2db;
+    border-color: #0098ce;
+}
+
+.btn-xs {
+    background-color: #f5f5f5;
+}
+
+.btn-xs:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-xs {
+    cursor: default;
+}
+
+
+/*-------------------------------------------------
+	   Login
+-------------------------------------------------*/
+
+#login {
+    padding-top: 5%;
+    text-align: center;
+}
+
+#login img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#loginForm {
+    text-align: left;
+}
+
+#login .message {
+    text-align: left;
+}
+
+
+/*-------------------------------------------------
+	   Header
+-------------------------------------------------*/
+
+#header {
+    min-height: 100px;
+    text-align: left;
+    padding-top: 2%;
+}
+
+@media (min-width: 1200px) {
+    #header .alert {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #header {
+        min-height: 60px;
+    }
+}
+
+
+/*-------------------------------------------------
+	   Messages / Alerts
+-------------------------------------------------*/
+
+.alert {
+    background-color: transparent;
+    border-width: 2px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    padding-left: 0;
+    display: table;
+    width: 100%;
+    overflow: auto;
+}
+
+.message {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#currentUser {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.alDefault {
+    border-color: #39aedf;
+    /* standard ci color */
+}
+
+.alDefault p {
+    color: #39aedf;
+}
+
+.alSuccess {
+    border-color: #449d44;
+    /* same as success color */
+}
+
+.alSuccess p {
+    color: #449d44 !important;
+}
+
+.alError {
+    border-color: #d9534f;
+    /* same as danger color */
+}
+
+.alError p {
+    color: #d9534f !important;
+}
+
+@media (max-width: 768px) {
+    .alert {
+        margin-bottom: 10px;
+    }
+}
+
+
+/*-------------------------------------------------
+	    Sidebar
+-------------------------------------------------*/
+
+#sidebar {
+    margin-top: 10px;
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+.navbar {
+    padding: 0;
+}
+
+.navbar-btn {
+    padding: 10px;
+    margin: 4px 0;
+    width: 100%;
+}
+
+#manageUsers-button {
+    margin-top: 50px;
+}
+
+#manageRooms-button {
+    margin-bottom: 50px;
+}
+
+#logo {
+    width: 160px;
+    height: auto;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 5;
+}
+
+#logo:hover {
+    cursor: pointer;
+}
+
+.brand {
+    text-align: center;
+}
+
+@media (max-width: 991px) {
+    #logo {
+        width: 145px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        padding: 0;
+    }
+    .border-bottom {
+        border-bottom: 1px solid lightgrey;
+    }
+    .brand {
+        text-align: left !important;
+        line-height: 50px !important;
+    }
+    #logo {
+        width: 145px;
+        margin-bottom: 15px;
+    }
+    #header {
+        min-height: 60px;
+        padding-bottom: 10px;
+    }
+    .alert {
+        margin-bottom: 10px;
+    }
+    #manageUsers-button {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    #manageRooms-button {
+        margin-bottom: auto;
+    }
+}
+
+
+/*-------------------------------------------------
+	    Hamburger Menu
+-------------------------------------------------*/
+
+.nav-side-menu .toggle-btn {
+    display: none;
+}
+
+.nav-side-menu ul,
+.nav-side-menu li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-list {
+    position: relative;
+    z-index: 5;
+    padding-bottom: 10px;
+}
+
+@media (min-width: 767px) {
+    .nav-side-menu .menu-list .menu-content {
+        display: block;
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-side-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .nav-side-menu .toggle-btn {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 10 !important;
+        font-size: 25px;
+        width: 40px;
+        text-align: center;
+    }
+}
+
+
+/*-------------------------------------------------
+   	Main Content Area
+-------------------------------------------------*/
+
+.main-content {
+    padding-left: 20px;
+    min-height: 65vh;
+    border-left: 1px solid lightgrey;
+    border-radius: 0;
+}
+
+.main-content h2 {
+    margin-bottom: 20px;
+    margin-top: 18px;
+}
+
+.delete-button {
+    color: red;
+    margin: 0 !important;
+}
+
+.delete-button:hover {
+    color: #C80000;
+}
+
+.button-align-right {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        border-left: none;
+        padding-left: 0;
+        padding-right: 0;
+        margin: 0;
+        margin-top: 115px;
+    }
+    .main-content h2 {
+        margin-bottom: 15px;
+        align-self: left;
+    }
+}
+
+
+/*-------------------------------------------------
+	   Room Overview
+-------------------------------------------------*/
+
+#roomsOverviewList button {
+    padding: 10px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: auto;
+    border: 1px solid lightgrey;
+}
+
+.room-div {
+    padding-left: 0;
+}
+
+#roomsOverviewList img {
+    width: 150px;
+    height: auto;
+    margin: 5% 5% 10% 5%;
+}
+
+@media (max-width: 768px) {
+    #roomsOverview input {
+        width: 100%;
+        height: 50vh;
+    }
+    #roomsOverviewList img {
+        width: 200px;
+        margin: 3% 3% 10% 3%;
+    }
+}
+
+
+/*-------------------------------------------------
+	    Room Color Classes
+-------------------------------------------------*/
+
+.bathroom {
+    color: #34dddd;
+    border-color: #34dddd !important;
+}
+
+.bathroom:hover {
+    color: white;
+    background-color: #34dddd;
+    border-color: #32d1d1 !important;
+}
+
+.kitchen {
+    color: #ff5c26;
+    border-color: #ff5c26 !important;
+}
+
+.kitchen:hover {
+    color: white;
+    background-color: #ff5c26;
+    border-color: #e75423 !important;
+}
+
+.livingroom {
+    color: #159308;
+    border-color: #159308 !important;
+}
+
+.livingroom:hover {
+    color: white;
+    background-color: #159308;
+    border-color: #138407 !important;
+}
+
+.childrens-room {
+    color: #ffba00;
+    border-color: #ffba00 !important;
+}
+
+.childrens-room:hover {
+    color: white;
+    background-color: #ffba00;
+    border-color: #f0af00 !important;
+}
+
+.office {
+    color: #ca0219;
+    border-color: #ca0219 !important;
+}
+
+.office:hover {
+    color: white;
+    background-color: #ca0219;
+    border-color: #b30216 !important;
+}
+
+.bedroom {
+    color: #7441af;
+    border-color: #7441af !important;
+}
+
+.bedroom:hover {
+    color: white;
+    background-color: #7441af;
+    border-color: #653998 !important;
+}
+
+
+/*-------------------------------------------------
+	   Lights Overview / Lights Switch
+-------------------------------------------------*/
+
+#lightsOverviewList button {
+    padding: 10px;
+    margin: 4px 0;
+    width: 100%;
+    height: auto;
+    border: 1px solid lightgrey;
+    text-align: left;
+}
+
+.light-div {
+    padding-left: 0;
+}
+
+#lightsOverviewList img {
+    width: 20px;
+    height: auto;
+    margin-right: 10px;
+    margin-top: -5px;
+}
+
+@media (max-width: 768px) {
+    #lightsOverview input {
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+/*-------------------------------------------------
+	   Management Sections
+-------------------------------------------------*/
+
+#permittedUsersList li {
+    display: inline;
+    margin-right: 5px;
+}
+
+#permittedRoomsList li {
+    display: inline;
+    margin-right: 5px;
+}
+
+#userList tr {
+    cursor: pointer;
+}
+
+#manageRoomsList tr {
+    cursor: pointer;
+}
+
+#manageLightsList tr {
+    cursor: pointer;
+}
+
+#userPermissionsList tr {
+    cursor: pointer;
+}
+
+#roomAccessList tr {
+    cursor: pointer;
+}
+
+
+/*-------------------------------------------------
+	   Footer
+-------------------------------------------------*/
+
+footer {
+    background-color: grey;
+    height: 100px;
+    padding: 30px 0;
+    margin-top: 30px;
+    border-top: 1px solid #777;
+    text-align: left;
+}
+
+.footer-left {
+    text-align: right;
+    border-right: 1px solid lightgrey;
+}
+
+footer p {
+    color: white !important;
+    font-weight: lighter;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+}
+
+.footer-sub {
+    opacity: 0.7;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    text-align: center;
+}

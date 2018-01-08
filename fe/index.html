@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+<!-- testdata for access:
+     Admin: Name: qwe, PW: 123
+     User: Name: Judith, PW: 123
+  -->
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>LuxUs</title>
+
+        <!-- ############### FAVICON ############### -->
+        <link rel="shortcut icon" href="images/favicon.png">
+
+        <!-- ############### CSS ############### -->
+        <!-- Bootstrap CSS minified -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="styles/style.css">
+
+        <!-- ############### JS ############### -->
+        <!-- jQuery Core uncompressed -->
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <!-- Bootstrap JS minified -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- Custom JS -->
+        <script src="scripts/controller.js"></script>
+        <script src="scripts/user/userLogic.js"></script>
+        <script src="scripts/user/userDataQueries.js"></script>
+        <script src="scripts/room/roomLogic.js"></script>
+        <script src="scripts/room/roomDataQueries.js"></script>
+        <script src="scripts/light/lightLogic.js"></script>
+        <script src="scripts/light/lightDataQueries.js"></script>
+        <script src="scripts/permission/permissionLogic.js"></script>
+        <script src="scripts/permission/permissionDataQueries.js"></script>
+    </head>
+
+    <body>
+        <div class="container main-container">
+
+            <div id="empty"></div>
+
+            <!-- #################### LOGIN SCREEN #################### -->
+            <div id="login">
+
+                <!-- LOGO -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+                        <img alt="Logo" src="images/logo.png">
+                    </div>
+                </div>
+
+                <!-- MESSAGE -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+                        <div class="alert alDefault" role="alert">
+                            <p class="message"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <div class="row" id="loginForm">
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+                        <div class="form-group">
+                            <label for="loginName">Username:</label>
+                            <input type="text" class="form-control" id="loginName">
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPass">Password:</label>
+                            <input type="password" class="form-control" id="loginPass">
+                        </div>
+                        <div class="button-align-right">
+                            <button type="button" class="btn btn-primary" id="login-button">Login</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- #################### HOME SCREEN #################### -->
+            <!-- HEADER -->
+            <div id="header">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alDefault" role="alert">
+                            <p class="message"></p>
+                            <button class="btn btn-xs pull-right" id="currentUser"></button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- SIDEBAR -->
+            <div class="col-xs-12 col-sm-4 col-md-3 nav-side-menu border-bottom" id="sidebar">
+                <div class="brand">
+                    <img alt="Logo" src="images/logo.png" id='logo'>
+                </div>
+                <span class="glyphicon glyphicon-menu-hamburger toggle-btn" data-toggle="collapse" data-target="#menu-content"></span>
+                <div class="menu-list">
+                    <ul id="menu-content" class="menu-content collapse out">
+                        <li><input id="home-button" class="btn navbar-btn btn-default" type="button" value="Room Overview"></li>
+                        <li><input id="manageUsers-button" class="btn navbar-btn btn-default" type="button" value="User Management"></li>
+                        <li><input id="manageRooms-button" class="btn navbar-btn btn-default" type="button" value="Room Management"></li>
+                        <li><input id="logout-button" class="btn navbar-btn btn-default btn-grey" type="button" value="Logout"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT -->
+            <div class="col-sm-8 col-md-9 main-content">
+
+                <!-- ROOM OVERVIEW / USER HOME -->
+                <div id="roomsOverview">
+                    <h2>Room Overview</h2>
+                    <div id="roomsOverviewList"></div>
+                </div>
+
+                <!-- LIGHT STATUS VIEW / USER HOME -->
+                <div id="lightsOverview">
+                    <h2>Light Switch > <span id="lightsOverviewRoomName"></span></h2>
+                    <hr>
+                    <div id="lightsOverviewList"></div>
+                    <div class="col-xs-12 col-sm-8 light-div button-align-right">
+                        <button type="button" class="btn btn-grey" id="lightsOverviewBack-button">Back</button>
+                    </div>
+                </div>
+
+                <!-- MANAGE USERS VIEW -->
+                <div id="manageUsersView">
+                    <h2>User Management</h2>
+                    <table class="table table-responsive table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>UID</th>
+                                <th>Name</th>
+                                <th>Admin Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="userList"></tbody>
+                    </table>
+                    <div class="button-align-right">
+                        <button type="button" class="btn btn-success" id="new-button">Create new user</button>
+                        <button type="button" class="btn btn-grey" id="manageUsersBack-button">Back</button>
+                    </div>
+                </div>
+
+                <!-- MANAGE USERS MODAL -->
+                <div class="modal" id="userDataModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <div class="alert alDefault" role="alert">
+                                    <p class="modalMessage"></p>
+                                </div>
+                                <h3 class="modal-title">User Data</h3>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="changeUserId">
+                                <div class="form-group">
+                                    <label for="newUserName">Name:</label>
+                                    <input type="text" class="form-control" id="newUserName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="newUserPass">Password:</label>
+                                    <input type="password" class="form-control" id="newUserPass">
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                         <input type="checkbox" class="form-check-input" name="newUserisAdmin" id="newUserisAdmin">&nbsp; Save as Admin? <br /><span style="font-weight:normal; padding-left: 18px">(Admins automatically have access to all rooms)</span>
+                                    </label>
+                                </div>
+                                <div id="changeAccessSection">
+                                    <hr>
+                                    <h4>Access to rooms:</h4>
+                                    <ul id="permittedRoomsList"></ul>
+                                    <div class="button-align-right">
+                                        <button type="button" class="btn btn-primary" id="manageUsersManageUserPermissions-button">Manage access</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" id="save-button">Save</button>
+                                <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROOMS ACCESS MODAL -->
+                <div class="modal" id="roomAccessModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <div class="alert alDefault" role="alert">
+                                    <p class="modalMessage"></p>
+                                </div>
+                                <h3 class="modal-title">Room Access for <span id="roomAccessModalUserName"></span></h3>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-responsive table-condensed table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Access</th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="roomAccessList"></tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" id="roomAccessSave-button">Save</button>
+                                <button type="button" class="btn btn-grey" id="roomAccessClose-button">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MANAGE ROOMS VIEW -->
+                <div id="manageRoomsView">
+                    <h2>Room Management</h2>
+                    <table class="table table-responsive table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>RID</th>
+                                <th>Name</th>
+                                <th>Number of Lights</th>
+                                <th>Roomtype</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="manageRoomsList"></tbody>
+                    </table>
+                    <div class="button-align-right">
+                        <button type="button" class="btn btn-success" id="manageRoomsCreate-button">Create new room</button>
+                        <button type="button" class="btn btn-grey" id="manageRoomsBack-button">Back</button>
+                    </div>
+                </div>
+
+                <!-- MANAGE ROOMS MODAL -->
+                <div class="modal" id="manageRoomsModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <div class="alert alDefault" role="alert">
+                                    <p class="modalMessage"></p>
+                                </div>
+                                <h3 class="modal-title">Room Data</h3>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="changeRoomId">
+                                <input type="hidden" id="changeRoomType">
+                                <div class="form-group">
+                                    <label for="newRoomName">Name:</label>
+                                    <input type="text" class="form-control" id="newRoomName">
+                                </div>
+                                <label for="selectRoomType">Room Type:</label>
+                                <select class="form-control" id="selectRoomType">
+                                      <option id="selectRoomTypeFirstOption">Select roomtype ...</option>
+                                      <div id="roomTypesList"></div>
+                                 </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" id="manageRoomsModalSave-button">Save</button>
+                                <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MANAGE LIGHTS VIEW -->
+                <div id="manageLightsView">
+                    <h2>Lights Management > <span id="manageLightsRoomName"></span></h2>
+                    <hr>
+                    <h4>Permitted Users:</h4>
+                    <ul id="permittedUsersList"></ul>
+                    <div class="button-align-right">
+                        <button type="button" class="btn btn-primary" id="manageLightsManageUserPermissions-button">Manage permissions</button>
+                    </div>
+                    <hr>
+                    <table class="table table-responsive table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>LID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="manageLightsList"></tbody>
+                    </table>
+                    <div class="button-align-right">
+                        <button type="button" class="btn btn-primary" id="manageLightsChangeRoomName-button">Change room data</button>
+                        <button type="button" class="btn btn-success" id="manageLightsAddNewLight-button">Create new light</button>
+                        <button type="button" class="btn btn-grey" id="manageLightsBack-button">Back</button>
+                    </div>
+                </div>
+
+                <!-- MANAGE LIGHTS MODAL -->
+                <div class="modal" id="manageLightsModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <div class="alert alDefault" role="alert">
+                                    <p class="modalMessage"></p>
+                                </div>
+                                <h3 class="modal-title">Light Data</h3>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="changeLightId">
+                                <div class="form-group">
+                                    <label for="newLightName">Name:</label>
+                                    <input type="text" class="form-control" id="newLightName">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" id="manageLightsModalSave-button">Save</button>
+                                <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- USER PERMISSIONS MODAL -->
+                <div class="modal" id="userPermissionsModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <div class="alert alDefault" role="alert">
+                                    <p class="modalMessage"></p>
+                                </div>
+                                <h3 class="modal-title">User Permissions for <span id="userPermissionsModalRoomName"></span></h3>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-responsive table-condensed table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Access</th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="userPermissionsList">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" id="userPermissionsSave-button">Save</button>
+                                <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- #################### FOOTER #################### -->
+        <footer class="footer">
+            <div class="container">
+                <div class="col-xs-6 footer-left">
+                    <p>Thomas Brandstätter</p>
+                </div>
+                <div class="col-xs-6">
+                    <p>Judith Massar</p>
+                </div>
+                <p class="footer-sub">Web/App Development, SS 2017, FH Technikum Wien</p>
+            </div>
+        </footer>
+
+    </body>
+
+</html>
